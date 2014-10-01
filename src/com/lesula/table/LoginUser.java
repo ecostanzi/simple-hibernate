@@ -1,34 +1,32 @@
 package com.lesula.table;
 
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.bytecode.internal.javassist.FieldHandled;
+import org.hibernate.bytecode.internal.javassist.FieldHandler;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Entity
-public class LoginUser implements Serializable{
+public class LoginUser implements FieldHandled{
 	
-	private static final long serialVersionUID = 1L;
+    private FieldHandler fieldHandler;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="Id")
 	private int id;
-	
-	@Column(name="Email", length=100)
 	private String email;
-	
-	@Column(name="Password", length=100)
 	private String password;
-
-    @Column(name = "IsActive")
     private boolean isActive;
-	
-	public int getId() {
+    private UserAddress userAddress;
+
+    public LoginUser() {
+    }
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="Id")
+    public int getId() {
 		return id;
 	}
 
@@ -36,6 +34,7 @@ public class LoginUser implements Serializable{
 		this.id = id;
 	}
 
+    @Column(name="Email", length=100)
 	public String getEmail() {
 		return email;
 	}
@@ -44,6 +43,7 @@ public class LoginUser implements Serializable{
 		this.email = email;
 	}
 
+    @Column(name="Password", length=100)
 	public String getPassword() {
 		return password;
 	}
@@ -52,4 +52,36 @@ public class LoginUser implements Serializable{
 		this.password = password;
 	}
 
+    @Column(name = "IsActive")
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL, mappedBy = "user")
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    public UserAddress getUserAddress() {
+        if (fieldHandler != null) {
+            return (UserAddress) fieldHandler.readObject(this, "userAddress", userAddress);
+        }
+        return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    @Override
+    public void setFieldHandler(FieldHandler handler) {
+        this.fieldHandler = fieldHandler;
+    }
+
+    @Override
+    @Transient
+    public FieldHandler getFieldHandler() {
+        return fieldHandler;
+    }
 }

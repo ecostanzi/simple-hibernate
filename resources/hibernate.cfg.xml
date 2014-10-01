@@ -45,6 +45,7 @@
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 
 		<mapping class="com.lesula.table.LoginUser"/>
+        <mapping class="com.lesula.table.UserAddress"/>
     </session-factory>
 
 </hibernate-configuration>
