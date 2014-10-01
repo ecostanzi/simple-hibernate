@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/test-hibernate?autoReconnect=true</property>
+		<property name="connection.username">user</property>
+		<property name="connection.password">password</property>
+		<!-- <property name="connection.autocommit">true</property> -->   
+
+        <!-- Update the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+		<!-- Session properties -->
+		<property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory</property>
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+
+		<!-- configuration pool via c3p0 -->
+		<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.max_size">100</property>
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.acquire_increment">2</property>
+		<property name="hibernate.c3p0.idle_test_period">180</property>
+		<property name="hibernate.c3p0.max_statements">0</property>
+		<property name="hibernate.c3p0.timeout">600</property>
+		<property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces">true</property>
+		<property name="hibernate.c3p0.unreturnedConnectionTimeout">14400</property>
+		
+		<property name="hibernate.connection.CharSet">utf8</property>
+		<property name="hibernate.connection.characterEncoding">utf8</property>
+		<property name="hibernate.connection.useUnicode">true</property>
+		
+		<property name="hibernate.globally_quoted_identifiers">true</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<mapping class="com.lesula.table.LoginUser"/>
+    </session-factory>
+
+</hibernate-configuration>

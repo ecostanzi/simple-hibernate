@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin:'application'
+
+version = '1.0'
+
+mainClassName = "com.lesula.htest.TestHibernate"
+applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.lesula.htest.TestHibernate'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.6.Final'
+    compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '4.3.6.Final'
+    compile 'mysql:mysql-connector-java:5.1.13'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
