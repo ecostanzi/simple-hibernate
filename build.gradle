@@ -12,6 +12,9 @@ jar {
     manifest {
         attributes 'Main-Class': 'com.lesula.htest.TestHibernate'
     }
+
+    //fat jar settings
+    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 repositories {
