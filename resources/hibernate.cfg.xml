@@ -44,7 +44,12 @@
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 
-		<mapping class="com.lesula.table.LoginUser"/>
+		<mapping class="com.lesula.db.table.Course"/>
+		<mapping class="com.lesula.db.table.CourseSession"/>
+		<mapping class="com.lesula.db.table.Professor"/>
+		<mapping class="com.lesula.db.table.Student"/>
+		<mapping class="com.lesula.db.table.Exam"/>
+		<mapping class="com.lesula.db.table.ExamResult"/>
     </session-factory>
 
 </hibernate-configuration>

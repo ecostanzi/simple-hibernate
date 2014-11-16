@@ -1,4 +1,4 @@
-package com.lesula.conf;
+package com.lesula.db.conf;
 
 /**
  * RepositorySessionFactory.java
@@ -18,11 +18,16 @@ public class HibernateUtils {
 
 	private SessionFactory sessionFactory;
 
-	private HibernateUtils() {}
+	private HibernateUtils() {
+		Configuration configuration = new Configuration().configure();
+		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
+				applySettings(configuration.getProperties());
+		sessionFactory = configuration.buildSessionFactory(builder.build());
+	}
 
 	/**
-	 * Return the singleton instance of {@link com.lesula.conf.HibernateUtils}
-	 * @return - Object of {@link com.lesula.conf.HibernateUtils}
+	 * Return the singleton instance of {@link com.lesula.db.conf.HibernateUtils}
+	 * @return - Object of {@link com.lesula.db.conf.HibernateUtils}
 	 */
 	public static HibernateUtils getInstance() {
 		if (hibernateUtils == null) {
@@ -34,21 +39,11 @@ public class HibernateUtils {
 
 	/**
 	 * Return {@link SessionFactory} object corresponding to BeenZ API
-	 * 
+	 *
 	 * @return the sessionFactory
 	 */
 	public SessionFactory getSessionFactory() {
-		if(sessionFactory == null) {
-			Configuration configuration = new Configuration().configure();
-			StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
-			applySettings(configuration.getProperties());
-			sessionFactory = configuration.buildSessionFactory(builder.build());
-		}
 		return sessionFactory;
-	}
-	
-	public static Session openSession(){
-		return getInstance().getSessionFactory().openSession();
 	}
 
 	public static Session getSession(){

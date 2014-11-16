@@ -1,9 +1,9 @@
-package com.lesula.dao;
+package com.lesula.db.dao;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface IHbnDAO<E, ID extends Serializable> {
+public interface DaoInterface<E, ID extends Serializable> {
 
 	E findById(ID id);
 
