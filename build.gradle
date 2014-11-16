@@ -7,6 +7,9 @@ version = '1.0'
 mainClassName = "com.lesula.htest.TestHibernate"
 applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
 
 jar {
     manifest {
