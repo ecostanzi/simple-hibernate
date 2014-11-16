@@ -23,7 +23,7 @@ public class Course {
     private String name;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
+    @Cascade(value = {CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private Set<CourseSession> sessions = new HashSet<CourseSession>();
 
     public Course(){}
